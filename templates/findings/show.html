@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>Finding Details</h1>
+<div class="finding-details">
+    <p><strong>title:</strong> {{ finding.asset_name }}</p>
+    <p><strong>asset_name:</strong> {{ finding.asset_name }}</p>
+    <p><strong>severity:</strong> {{ finding.severity }}</p>
+    <p><strong>description:</strong> {{ finding.description }}</p>
+    <p><strong>poc_video_url:</strong> {{ finding.poc_video_url }}</p>
+    <p><strong>status:</strong> {{ finding.status }}</p>
+    <p><strong>proofOfConcept:</strong> {{ finding.proofOfConcept }}</p>
+</div>
+{% endblock %}

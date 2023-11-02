@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>Finding List</h1>
+
+<div class="row">
+    <div class="col-6 my-3">
+        <a href="index.php?route=findings&action=create" class="btn btn-primary">Add Finding</a>
+    </div>
+    <div class="col-6 text-end">
+        {% if session.user_role == 'admin' %}
+        <a href="index.php?route=generate_report" class="btn btn-outline-success">Generate Report</a>
+        {% endif %}
+
+    </div>
+</div>
+
+<hr>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Asset Name</th>
+                <th>Severity</th>
+                <th>Submitted By</th>
+                <th>Status</th>
+                <th>Action</th>
+                {% if app.session.get('user_role') == 'admin' %}
+                <th>Approvement</th> 
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for finding in findings %}
+                <tr>
+                    <td>{{ finding.title }}</td>
+                    <td>{{ finding.asset_name }}</td>
+                    <td>{{ finding.severity }}</td>
+                    <td>
+                        {{ finding.name }} <br>
+                        <small> {{ finding.email }}</small>
+                    
+                    </td>
+                    <td> 
+                        {% if finding.status == "approved" %}
+                            <span class="fw-bold text-success">{{ finding.status }}</span>
+                        {% elseif finding.status == "rejected" %}
+                            <span class="fw-bold text-danger">{{ finding.status }}</span>
+                        {% else %}
+                            <span class="fw-bold text-primary">{{ finding.status }}</span>
+                        {% endif %}
+                    </td>                    
+                    <td>
+                        <a href="index.php?route=findings&action=show&id={{ finding.id }}" class="btn btn-primary">Show</a>
+                        {% if finding.status != "approved" %}
+                        <a href="index.php?route=findings&action=edit&id={{ finding.id }}" class="btn btn-warning">Edit</a>
+                        <a href="index.php?route=findings&action=delete&id={{ finding.id }}" class="btn btn-danger">Delete</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if session.user_role == 'admin' %}
+                        <a href="index.php?route=findings&action=approve&id={{ finding.id }}" class="btn btn-success">Approve</a>
+                        <a href="index.php?route=findings&action=reject&id={{ finding.id }}" class="btn btn-dark">Reject</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

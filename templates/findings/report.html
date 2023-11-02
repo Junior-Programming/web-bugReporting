@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Finding Report</title>
+    <style>
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+
+        .finding {
+            background-color: #f2f2f2;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .finding-title {
+            font-weight: bold;
+        }
+
+        .description {
+            margin-top: 15px;
+        }
+
+        .poc {
+            background-color: #6cbf5e;
+            color: white;
+            padding: 10px;
+            margin-top: 15px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 20px 0;
+        }
+
+        h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 32px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h5>Laporan ini di-generate pada: {{ current_date }} </h5>
+        
+        <h1>Laporbug - Finding Report </h1>
+        <br>
+
+        {% for finding in findings %}
+        <div class="finding">
+            <div class="row">
+                <div class="col-6">
+                    <span class="finding-title">{{ finding.title }}</span>
+                </div>
+                <div class="col-6">
+                    Nama Aset: {{ finding.asset_name }}<br>
+                    Severity: {{ finding.severity }}
+                </div>
+            </div>
+            <div class="row description">
+                {{ finding.description }}
+            </div>
+            <div class="row poc">
+                <i>Anda dapat melihat PoC disini:</i> <br>
+                <a href="http://localhost/simvuln/uploads/{{ finding.proofOfConcept }}">http://localhost/simvuln/uploads/{{ finding.proofOfConcept }}</a>
+            </div>
+           
+        </div>
+        {% endfor %}
+
+    </div>
+</body>
+</html>
+

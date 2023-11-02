@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Error - Page Not Found</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f1f1f1;
+            font-family: Arial, sans-serif;
+        }
+
+        .error-container {
+            text-align: center;
+        }
+
+        .error-code {
+            font-size: 10rem;
+            color: #e74c3c;
+        }
+
+        .error-message {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .back-button {
+            margin: 125px;
+            text-decoration: none;
+            background-color: #520505;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #053c60;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <div class="error-message">Oops! Page Not Found</div>
+        <p>Sorry, halaman yang anda cari mungkin hanya ada di Lala Land!.</p>
+        <br>
+        <a href="index.php?route=login" class="back-button">Ke Halaman Login</a>
+    </div>
+</body>
+
+</html>

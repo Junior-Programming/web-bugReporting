@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>Create Finding</h1>
+<form action="index.php?route=findings&action=insert" method="POST" enctype="multipart/form-data">
+
+    <div class="form-group py-3">
+        <label for="severity">Nama asset:</label>
+        <select id="asset_name" name="asset_name" class="form-control" >
+            <option value="polibatam.ac.id">Polibatam</option>
+            <option value="sid.polibatam.ac.id">SID</option>
+            <option value="sim.polibatam.ac.id">SILAM</option>
+            <option value="helpdesk.polibatam.ac.id">Helpdesk</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" name="title" class="form-control">
+    </div>
+    
+    <div class="form-group py-3">
+        <label for="description">Description:</label>
+        <textarea name="description" class="form-control" rows="4" required></textarea>
+    </div>
+    
+    <div class="form-group py-3">
+        <label for="severity">Severity:</label>
+        <select id="severity" name="severity" class="form-control" >
+            <option value="Critical">Critical</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+        </select>
+    </div>
+
+
+    <div class="form-group py-3">
+        <label for="proofOfConcept">Proof of Concept:</label>
+        <input type="file" name="proofOfConcept" class="form-control-file" accept=".txt,.pdf,.docx,.zip" required>
+    </div>    
+
+    <div class="form-group py-3">
+        <label for="poc_video_url">POC Video URL: (opsional)</label>
+        <input type="text" name="poc_video_url" class="form-control">
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Create Finding</button>
+</form>
+{% endblock %}

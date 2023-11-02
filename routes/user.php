@@ -62,9 +62,9 @@ if (isset($_GET['action'])) {
         case 'password':
             if( isset($_SESSION['user_logged_in']) ) {
                 return render( $users->getUpdatePasswordResponse() );
+            } else {
+                return render( $users->abort() );
             }
-
-            return render( $users->abort() );
             break;
     }
 }

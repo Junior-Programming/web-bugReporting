@@ -156,6 +156,7 @@ class User
             if( $user ) {
                 if( password_verify($current_password, $user['password']) ) {
                     if( $new_password === $confirm_new_password ) {
+                        # Pengimplementasian SQL code
                         return $this->back('Password updated successfully!');
                     }
 

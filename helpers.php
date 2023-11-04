@@ -28,4 +28,10 @@ if(! function_exists('getIfExist') ) {
     }
 }
 
+if(! function_exists('___') ) {
+    function ___(string $string) {
+        return htmlspecialchars($string);
+    }
+}
+
 ?>

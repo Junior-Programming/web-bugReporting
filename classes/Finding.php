@@ -12,13 +12,15 @@ class Finding
 
     public function list()
     {
+        $keyword = $_GET['keyword'] ?? '';
+
         try {
             if ($this->auth->isAdmin() === true) {
-                $sql = "SELECT * FROM users u JOIN findings f ON f.user_id = u.id ORDER BY f.id DESC";
+                $sql = "SELECT * FROM users u JOIN findings f ON f.user_id = u.id WHERE f.title LIKE '%". ___($keyword) ."%' ORDER BY f.id DESC";
                 $stmt = $this->pdo->prepare($sql);
             } else {
                 $user_id = $this->auth->getUserId();
-                $sql = "SELECT * FROM users u JOIN findings f ON f.user_id = u.id WHERE f.user_id = :user_id";
+                $sql = "SELECT * FROM users u JOIN findings f ON f.user_id = u.id WHERE f.user_id = :user_id WHERE f.title LIKE '%". ___($keyword) ."%'";
                 $stmt = $this->pdo->prepare($sql);
                 $stmt->bindParam(':user_id', $user_id);
             }
@@ -26,7 +28,7 @@ class Finding
             $stmt->execute();
             $findings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            return $this->twig->render('findings/list.html', ['findings' => $findings]);
+            return $this->twig->render('findings/list.html', ['findings' => $findings, 'keyword' => $keyword]);
         } catch (PDOException $e) {
             return false;
         }

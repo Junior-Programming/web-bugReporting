@@ -2,9 +2,12 @@
 
 session_start();
 
-// Load the classes and helpers
-require_once 'helpers.php';
+
+// Load vendor
 require_once 'vendor/autoload.php';
+
+// Load app classes
+require_once 'helpers.php';
 require_once 'classes/Database.php';
 require_once 'classes/User.php';
 require_once 'classes/Auth.php';

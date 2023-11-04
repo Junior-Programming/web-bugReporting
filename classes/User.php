@@ -11,13 +11,13 @@ class User
 
     public function list()
     {
-        $sql = "SELECT * FROM users";
+        $keyword = $_GET['keyword'] ?? '';
 
         try {
-            $stmt = $this->pdo->query($sql);
+            $stmt = $this->pdo->query("SELECT * FROM users WHERE name LIKE '%". ___($keyword) ."%'");
             $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            return $this->twig->render('users/list.html', ['users' => $users]);
+            return $this->twig->render('users/list.html', ['users' => $users, 'keyword' => $keyword]);
         } catch (PDOException $e) {
             return false;
         }

@@ -101,7 +101,10 @@ if (isset($_GET['action'])) {
             } else {
                 echo 'User ID tidak ditemukan!';
             }
-            break;                  
+            break;   
+        case "search":
+            # impelemtasi code search 
+        break;               
     }
 }
 ?>

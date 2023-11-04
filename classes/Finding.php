@@ -238,5 +238,19 @@ class Finding
         }
     }
 
+    public function searchFinding($keyword) {
+        /* $query = "SELECT * FROM findings WHERE title LIKE :keyword AND severity LIKE :keywoard AND asset_name LIKE :keyword";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':keyword', $keyword, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function close() {
+        $this->pdo = null; */
+
+    }
+
 }
 ?>

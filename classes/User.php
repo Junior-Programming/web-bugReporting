@@ -155,8 +155,15 @@ class User
 
             if( $user ) {
                 if( password_verify($current_password, $user['password']) ) {
+                    
                     if( $new_password === $confirm_new_password ) {
-                        # Pengimplementasian SQL code
+                        $newPasswordHash = password_hash($new_password, PASSWORD_DEFAULT);
+
+                        $updateQuery = "UPDATE users SET password = :password";
+                        $stmt = $this->pdo->prepare($updateQuery);
+                        $stmt->bindParam(':password', $newPasswordHash, PDO::PARAM_STR);
+                        $stmt->execute();
+
                         return $this->back('Password updated successfully!');
                     }
 

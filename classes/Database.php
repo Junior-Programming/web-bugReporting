@@ -3,11 +3,11 @@ class Database
 {
     private $host = 'localhost';
 
-    private $username = 'admin';
+    private $username = 'root';
 
     private $password = '';
 
-    private $database = 'simvuln';
+    private $database = 'laporbug';
 
     private $connection;
 

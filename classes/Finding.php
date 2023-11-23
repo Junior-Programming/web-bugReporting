@@ -16,13 +16,10 @@ class Finding
 
         try {
             if ($this->auth->isAdmin() === true) {
-                $sql = "SELECT * FROM users u JOIN findings f ON f.user_id = u.id WHERE f.title LIKE '%". ___($keyword) ."%' ORDER BY f.id DESC";
-                $stmt = $this->pdo->prepare($sql);
+                $stmt = $this->pdo->prepare("select * from `findings` where `title` LIKE '%".$keyword."%' ORDER BY `id` DESC");
             } else {
                 $user_id = $this->auth->getUserId();
-                $sql = "SELECT * FROM users u JOIN findings f ON f.user_id = u.id WHERE f.user_id = :user_id WHERE f.title LIKE '%". ___($keyword) ."%'";
-                $stmt = $this->pdo->prepare($sql);
-                $stmt->bindParam(':user_id', $user_id);
+                $stmt = $this->pdo->prepare("select * from `findings` where `findings`.`user_id` = ".$user_id." and `findings`.`user_id` is not null and `title` LIKE '%".$keyword."%' ORDER BY `id` DESC");
             }
 
             $stmt->execute();
@@ -30,7 +27,7 @@ class Finding
 
             return $this->twig->render('findings/list.html', ['findings' => $findings, 'keyword' => $keyword]);
         } catch (PDOException $e) {
-            return false;
+            throw $e;
         }
     }
 
@@ -71,7 +68,7 @@ class Finding
 
         if (!$title or !$description or !$asset_name or !$severity or !$proofOfConcept or !$status) {
             echo "Ada field yang lupa diisi.";
-            exit;
+            return;
         }
     
         $sql = "INSERT INTO findings (title, severity, asset_name, user_id, description, proofOfConcept, poc_video_url, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";

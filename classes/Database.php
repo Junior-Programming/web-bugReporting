@@ -2,9 +2,13 @@
 class Database
 {
     private $host = 'localhost';
+
     private $username = 'admin';
+
     private $password = '';
+
     private $database = 'simvuln';
+
     private $connection;
 
     public function __construct()
